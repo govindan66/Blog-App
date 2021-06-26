@@ -1,0 +1,152 @@
+{% load static %}
+{% load cache %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    {% cache 300 css %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- Costum CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endcache css %}
+    {% block Styles %} {% endblock Styles %}
+    <title>{% block title %}{% endblock %}</title>
+
+</head>
+
+<body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed">
+                <div class="navbar-brand-logo">
+                    <h1 class='text-white font-weight-bold'>Blog App</h1>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        {% cache 300 navbar %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'blogs:Home' %}">Home</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'blogs:AllBlogs' %}">Blogs</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'blogs:Contact' %}">Contact Us</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'blogs:About' %}">About</a>
+                        </li>
+                        {% endcache navbar %}
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'blogs:Profile' %}">Dashboard</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Settings
+                            </a>
+                            <div class="dropdown-menu active" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'blogs:ChangePassword' %}">Change Password</a>
+                                <a class="dropdown-item" href="{% url 'blogs:Logout' %}">Logout</a>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class='nav-item active'>
+                            <a href="{% url 'blogs:Signup' %}" class='nav-link'>Sign Up</a>
+                        </li>
+                        <li class='nav-item active'>
+                            <a href="{% url 'blogs:Login' %}" class='nav-link'>Login</a>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container main-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    {% for message in messages  %}
+                        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                            <strong>{{message.tags}}</strong> {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                {% block side %}{% endblock side %}
+
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+        <!-- Footer -->
+        <!-- <footer class="text px-3 text-white" style="background-color: #000000"> -->
+            <!-- Grid container -->
+            <!-- Grid row-->
+            <!-- <div class="row pt-5">
+
+                <div class="col-md-9">
+                    <h6 class="text font-weight-bold">
+                        <a href="#!" class="text-white px-3">About us</a>
+                        <a href="#!" class="text-white px-3">Products</a>
+                        <a href="#!" class="text-white px-3">Awards</a>
+                        <a href="#!" class="text-white px-3">Help</a>
+                        <a href="#!" class="text-white px-3">Contact</a>
+
+                    </h6>
+                </div>
+                <div class="col-md-3 social-links">
+                    <h6>
+                        <a href="" class="text-white px-1">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="" class="text-white px-1">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="" class="text-white px-1">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="" class="text-white px-1">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="" class="text-white px-1">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </h6>
+                </div>
+
+
+            </div> -->
+
+            <!-- Copyright -->
+            <!-- <div class="text-center py-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                &copy; 2021 Copyright: Govinda Neupane
+            </div> -->
+            <!-- Copyright -->
+        <!-- </footer> -->
+    {% cache 300 js %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var alertList = document.querySelectorAll('.alert')
+    alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert)
+    })
+</script>
+{% endcache js %}
+</body>
+
+</html>

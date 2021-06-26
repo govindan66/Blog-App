@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block Styles %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block title %}
+    User Login
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" id='inputForm'>
+    {% csrf_token %}
+    <fieldset>
+        <legend> Login Form</legend>
+        {% if form.non_field_errors %}
+               {% for errors in form.non_field_errors %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Error</strong> {{errors}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+           {% endif %}
+    {% for fm_data in form  %}
+        <div class="form-group">
+            {{fm_data.label_tag}}<br>
+            {{fm_data}}  {{fm_data.errors|striptags}}<br>
+        </div>
+    {% endfor %}
+    <!--<div class="form-check">
+        <label for="remember" class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="remember" id="remember" value="True"> Remember Me </label>
+    </div>-->
+    {% if request.GET.nex %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+    {% endif %}
+        <div class="button-group">
+            <input type="submit" name="Login" value="Login" class="btn btn-register px-5">
+            <input type="reset" name="Reset" value="Cancel" class='btn btn-reset px-5'>
+        </div><br>
+
+</fieldset>
+</form>
+{% endblock %}

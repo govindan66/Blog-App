@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block Styles %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block title %}
+
+{% endblock %}
+{% block content %}
+    <div class="col-sm-10">
+        <h3 class='text-secondary'><a class='text-decoration-none' href="{% url 'blogs:Profile' %}">Dashboard</a>/
+            <a class='text-decoration-none' href="#">Add Blogs</a> </h3>
+        <form action="" method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" name="submit" value="Add" class='btn btn-register'>
+            <input type="reset" name="reset" value="Cancel" class='btn btn-reset'>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+#inputForm{
+    width: 50%;
+    margin: 0 auto;
+}
+label{
+    font-weight: 600;
+}
+legend{
+    font-weight: 700;
+    color: #e67e22;
+}
+input[type='text'], input[type='email'], input[type='password'], textarea{
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+}
+textarea{
+    width: 100%;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.btn-register, .btn-reset{
+    font-weight: 600;
+    width: 200px;
+    color: #fff;
+    background-color: #e67e22;
+}
+.btn-reset{
+    background-color: black;
+}
+.btn-register:hover{
+    color: #e67e22;
+}
+.btn-reset:hover{
+    color: red;
+}
+.btn-register:hover, .btn-reset:hover{
+    background-color: rgba(0,0,0,0.8);
+
+}

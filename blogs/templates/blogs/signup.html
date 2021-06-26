@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block Styles %}
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block title %}
+    User Registration
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" id='inputForm'>
+    {% csrf_token %}
+    <fieldset>
+        <legend> Registration Form</legend>
+        {% if form.non_field_errors %}
+               {% for errors in form.non_field_errors %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Error</strong> {{errors}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+           {% endif %}
+    {% for fm_data in form  %}
+        <div class="form-group">
+            {{fm_data.label_tag}}
+            {{fm_data}}  {{fm_data.errors|striptags}}
+        </div>
+    {% endfor %}
+    <br>
+        <div class="button-group">
+            <input type="submit" name="SignUp" value="Sign Up" class="btn btn-register px-7">
+            <input type="reset" name="Reset" value="Cancel" class='btn btn-reset px-7'>
+        </div><br>
+
+</fieldset>
+</form>
+{% endblock %}

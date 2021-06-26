@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block Styles %}
+    <style media="screen">
+        .blog{
+            background-color: rgb(178,168,168);
+        }
+        .text-right{
+            margin-left: 50%;
+        }
+
+        .image{
+            max-width: 100%;
+        }
+        .blog-img{
+            max-width: 100%;
+        }
+    </style>
+{% endblock %}
+{% block title %}
+    {{blog.title}}
+{% endblock %}
+
+{% block content %}
+        {% if request.user.is_authenticated %}
+            <h2><a href="{% url 'blogs:Profile' %}">Dashboard</a>/<a href="#">View Blogs</a> </h2>
+        {% endif %}
+        <div class="col-sm-10">
+        <div class="col-sm-6 blog">
+            <h2 class='display-4'>{{blog.title}}</h2>
+            <p class="text-justify">{{blog.description}}</p>
+            <p><span class="text-muted text-left font-weight-bold">Author: {{user.get_full_name}}</span>
+                <span class="text-right text-secondary">{{blog.pub_date}}</span></p>
+        </div>
+        <div class="col-sm-6 image">
+            <img class="blog-img" src="/media/{{blog.image}}" alt="{{blog.image}}">
+        </div>
+    </div>
+{% endblock %}

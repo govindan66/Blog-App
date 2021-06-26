@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+    Homepage
+{% endblock %}
+<div class='col-md-4'>
+    {% block content %}
+    <main class='container'>
+        {% for post in featured  %}
+        <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">{{post.title}}</h1>
+                <p class="lead my-3">{{post.short_des}}...</p>
+                <p class="lead mb-0"><a href="{% url 'blogs:ViewBlog' post.id %}" class="text-white fw-bold">Continue reading...</a></p>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row mb-2">
+        {% for post in blogs  %}
+
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    {% if post.image %}
+                    <div class="col-sm-6 p-4 d-flex flex-column position-static" width='400px'>
+                        <strong class="d-inline-block mb-2 text-primary">World</strong>
+                        <h3 class="mb-0">{{post.title}}</h3>
+                        <div class="mb-1 text-muted">{{post.pub_date}}</div>
+                        <p class="card-text mb-auto">{{post.short_des}}...</p>
+                        <a href="{% url 'blogs:ViewBlog' post.id %}" class="stretched-link">Continue reading</a>
+                    </div>
+
+                    <div class="col-sm-6 d-none d-lg-block my-auto">
+                        <img src="media/{{post.image}}" alt="{{post.image}}" class="img-thumbnail">
+                    </div>
+                    {% else %}
+                    <div class="col-sm-12 p-4 d-flex flex-column position-static" >
+                        <strong class="d-inline-block mb-2 text-primary">World</strong>
+                        <h3 class="mb-0">{{post.title}}</h3>
+                        <div class="mb-1 text-muted">{{post.pub_date}}</div>
+                        <p class="card-text mb-auto">{{post.short_des}}</p>
+                        <a href="#" class="stretched-link">Continue reading</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        {% endfor %}
+        </div>
+    </main>
+    {% endblock %}
+</div>

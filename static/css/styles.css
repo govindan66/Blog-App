@@ -1,0 +1,67 @@
+body{
+    background-color: #ccc!important;
+}
+/* **************************************************** */
+/* ****************HEADER****************************** */
+/* **************************************************** */
+header{
+    position:fixed;
+    width: 100%;
+    background-color:rgba(0,0,0,0.99);
+    z-index: 5;
+}
+nav{
+    background-color: #000000;
+    opacity:1;
+    width: 100%;
+
+}
+.main-body{
+    padding: 5% 0 0 0;
+}
+.active{
+    color: #000000;
+}
+#navbarNavDropdown{
+    font-weight: 600;
+    padding-left: 5%;
+
+}
+h1{
+    color: green;
+}
+
+/* **************************************************** */
+/* *****************FOOTER***************************** */
+/* **************************************************** */
+footer{
+    position: fixed;
+    bottom:0;
+    width:100%;
+}
+.row{
+    max-width:100%;
+}
+.social-links{
+    position:absolute;
+    right:0;
+}
+.social-links a{
+    text-decoration:none;
+    font-size: 20px;
+}
+.fa-facebook-f:hover{
+    color: blue;
+}
+.fa-twitter:hover{
+    color: lightblue;
+}
+.fa-linkedin:hover{
+    color: purple;
+}
+.fa-google:hover{
+    color: red;
+}
+.fa-instagram:hover{
+    color: pink;
+}

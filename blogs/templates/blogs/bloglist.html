@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block Styles %}
+<style media="screen">
+    .blog {
+        background-color: rgb(178, 168, 168);
+    }
+
+    .text-right {
+        margin-left: 60%;
+    }
+
+    .image {
+        max-width: 100%;
+    }
+
+    .blog-img {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+{% block title %}
+{{blog.title}}
+{% endblock %}
+
+{% block content %}
+<div class="col-sm blog">
+    <h1 class='display-1 text-center'>Blogs</h1>
+    <br>
+    {% for blog in blogs  %}
+    <table>
+        <tr>
+            <td scope="col" style="width:100%">
+                <h2 class='display-4'>{{blog.title}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td scope="col" style="width:50%">
+                <p class="text-justify">{{blog.description}}</p>
+                <p><span class="text-muted text-left font-weight-bold">Author: {{blog.author.get_full_name}}
+                    </span><span class="text-right text-secondary"><i>Published:{{blog.pub_date}}</i></span></p>
+            </td>
+            <td style="width:50%">
+
+                <img class="blog-img" src="/media/{{blog.image}}" alt="{{blog.image}}">
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+
+</div>
+{% endblock %}
